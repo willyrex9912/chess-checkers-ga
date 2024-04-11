@@ -1,19 +1,25 @@
 from typing import List
+from model.individual import Individual
+
 
 class AptitudeCalculator:
 
     def __init__(self):
         pass
 
-    def calculate_aptitude(self, individual: List) -> int:
+    def calculate_aptitudes(self, population: List[Individual]):
+        for individual in population:
+            self.calculate_aptitude(individual)
+
+    def calculate_aptitude(self, individual: Individual):
+        genes = individual.genes
         valid_pairs = 0
-        for i in range(len(individual)):
+        for i in range(len(genes)):
             evaluate_column = i + 1
-            evaluate_value = individual[i]
-            for j in range(evaluate_column, len(individual)):
+            evaluate_value = genes[i]
+            for j in range(evaluate_column, len(genes)):
                 current_column = j + 1
-                current_value = individual[j]
-                print("Comparando valor " + str(evaluate_value) + " en columna " + str(evaluate_column) + " con valor " + str(current_value) + " en columna " + str(current_column))
+                current_value = genes[j]
                 first_invalid_square = evaluate_value + current_column - evaluate_column
                 second_invalid_square = evaluate_value
                 third_invalid_square = evaluate_value - current_column + evaluate_column
@@ -24,4 +30,4 @@ class AptitudeCalculator:
                 if third_invalid_square == current_value:
                     continue
                 valid_pairs = valid_pairs + 1
-        return valid_pairs
+        individual.aptitude = valid_pairs
