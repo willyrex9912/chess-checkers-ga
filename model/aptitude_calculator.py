@@ -8,8 +8,10 @@ class AptitudeCalculator:
         pass
 
     def calculate_aptitudes(self, population: List[Individual]):
+        print("\nAptitude calculation:")
         for individual in population:
             self.calculate_aptitude(individual)
+            print(str(individual.genes) + " : " + str(individual.aptitude))
 
     def calculate_aptitude(self, individual: Individual):
         genes = individual.genes

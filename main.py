@@ -20,6 +20,7 @@ if __name__ == '__main__':
     populationGenerator.generate_population()
     aptitudeCalculator.calculate_aptitudes(populationGenerator.population)
     populationGenerator.generate_population_by_roulette()
+    aptitudeCalculator.calculate_aptitudes(populationGenerator.population)
 
 
 # See PyCharm help at https://www.jetbrains.com/help/pycharm/

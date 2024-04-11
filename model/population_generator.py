@@ -21,13 +21,16 @@ class PopulationGenerator:
 
     def generate_population_by_roulette(self):
         population = []
-        first = self.select_by_roulette()
-        second = self.select_by_roulette()
         while len(population) < self.population_size:
+            first = self.select_by_roulette()
+            second = self.select_by_roulette()
             population.extend(self.cross_individuals(first, second))
         self.population = population
 
     def cross_individuals(self, first: Individual, second: Individual) -> List[Individual]:
+        print("\nCrossing:")
+        print(first.genes)
+        print(second.genes)
         middle = int(len(first.genes) / 2)
         new_first = Individual([], 0)
         new_second = Individual([], 0)
@@ -35,6 +38,9 @@ class PopulationGenerator:
         new_first.genes.extend(second.genes[middle:])
         new_second.genes.extend(second.genes[:middle])
         new_second.genes.extend(first.genes[middle:])
+        print("New Individuals:")
+        print(new_first.genes)
+        print(new_second.genes)
         return [new_first, new_second]
 
     def select_by_roulette(self) -> Individual:
